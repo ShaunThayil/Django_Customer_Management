@@ -1,0 +1,28 @@
+{% load static %}
+<style>
+
+.msg-style{
+  font:18px;
+  color:#fff;
+  margin-right:20px;
+}
+
+
+
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="{% static 'images/pheonix.jpg' %}">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href=" {% url 'home' %}">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="{% url 'product'%}">Products</a>
+        
+      </div>
+    </div>
+
+    <span class = "msg-style">Hello, {{request.user}} !!</span>
+    <span class = "msg-style"><a href="{% url 'logout' %}">Logout</span>
+  </nav>
