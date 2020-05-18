@@ -1,28 +1,38 @@
-{% load static %}
+{% load static %}  <!-- Add Before Importing Static Files-->
+
 <style>
-
-.msg-style{
-  font:18px;
-  color:#fff;
-  margin-right:20px;
-}
-
-
-
+  .hello-msg{
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+  }
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <img src="{% static 'images/pheonix.jpg' %}">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href=" {% url 'home' %}">Dashboard <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="{% url 'product'%}">Products</a>
-        
-      </div>
-    </div>
 
-    <span class = "msg-style">Hello, {{request.user}} !!</span>
-    <span class = "msg-style"><a href="{% url 'logout' %}">Logout</span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <img src="{{request.user.customer.profile_pic.url}}" width='100' height='100'>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+    {% if request.user.is_staff %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'product' %}">Products</a>
+      </li>
+      {% else %}
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'setting' %}">Settings</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+
+    <span class = "hello-msg">Hello, {{request.user}}</span>  <!-- Dispay Username -->
+    <span class = "hello-msg"><a href="{% url 'logout' %}">Logout</a></span> <!-- Redirect URL, refer the name from urls.py -->
   </nav>
+
+  
